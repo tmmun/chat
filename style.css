@@ -1,0 +1,166 @@
+/* base */
+
+.inp {
+  background: #262A31;
+  font-family: 'Oswald', sans-serif;
+  color: white;
+  padding: 10px;
+  font-size: 20px;
+  outline: none;
+  border-width: 0px;
+}
+
+.but {
+  font-family: 'Oswald', sans-serif;
+  color: white;
+  font-size: 25px;
+  text-align: center;
+  line-height: 26px;
+}
+
+/* base */
+
+body {
+  background-color: #1b1b1b;
+  font-family: 'Bebas Neue', cursive;
+}
+
+#mes_cont {
+  padding: 20px;
+  height: 616px;
+  border-radius: 5px;
+  background: #323741;
+}
+
+.section {
+  scroll-snap-type: y mandatory;
+  overflow: auto;
+}
+
+.section::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+}
+
+.section_mes {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex: 0 0 300px;
+  height: 200px;
+  font-size: 50px;
+}
+
+#prof {
+  font-family: 'Oswald', sans-serif;
+  color: white;
+  border-width: 0px;
+  font-size: 20px;
+}
+
+#mes {
+  background-color: #39393b;
+  border-radius: 5px;
+  font-family: 'Oswald', sans-serif;
+  color: white;
+  border-width: 0px;
+  font-size: 20px;
+  margin-bottom: 20px;
+  padding: 10px;
+}
+
+.container {
+  box-shadow: 0px 4px 12px #080808;
+  padding: 10px;
+  background-color: #222222;
+  border-radius: 7px;
+}
+
+.grid {
+  margin-top: 50px;
+  display: grid;
+  grid-template-columns: repeat(3, 150px);
+  grid-template-rows: repeat(9, 50px);
+  grid-gap: 10px 10px;
+  justify-content: center;
+}
+
+.cont1 {
+  grid-column: 1/2;
+  grid-row: 1;
+}
+
+.cont2 {
+  grid-column: 2/3;
+  grid-row: 1;
+}
+
+.cont3 {
+  grid-column: 3/4;
+  grid-row: 1;
+}
+
+.cont4 {
+  grid-column: 1/4;
+  grid-row: 2/9;
+}
+
+.cont5 {
+  grid-column: 2/4;
+  grid-row: 9/10;
+}
+
+.cont6 {
+  grid-column: 1/2;
+  grid-row: 9/10;
+}
+
+@media (max-width: 768px) {
+
+  .container {
+    box-shadow: 0px 4px 12px #080808;
+    padding: 10px;
+    background-color: #222222;
+    border-radius: 7px;
+  }
+
+  .grid {
+    margin-top: 50px;
+    display: grid;
+    grid-template-columns: repeat(1, 300px);
+    grid-template-rows: repeat(15, 50px);
+    grid-gap: 10px 10px;
+    justify-content: center;
+  }
+
+  .cont1 {
+    grid-column: 1/2;
+    grid-row: 1;
+  }
+
+  .cont2 {
+    grid-column: 1/2;
+    grid-row: 2;
+  }
+
+  .cont3 {
+    grid-column: 1/2;
+    grid-row: 3;
+  }
+
+  .cont4 {
+    grid-column: 1/2;
+    grid-row: 4/9;
+  }
+
+  .cont5 {
+    grid-column: 1/2;
+    grid-row: 9/10;
+  }
+
+  .cont6 {
+    grid-column: 1/2;
+    grid-row: 10/11;
+  }
+
+}
