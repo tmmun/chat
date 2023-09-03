@@ -11,33 +11,47 @@ $password = ver($conn, $title);
 
 if (password_verify($login, $password)) {
     // добавляем значения в таблицу
-    $sql = "INSERT INTO `Messages` (`id`, `title`, `content`) VALUES (NULL, '$title', '$content')";
+    $sql = "INSERT INTO `Messages` (`id`, `title`, `content`) VALUES (NULL, ?, ?)";
 
-    // запрос к базе данных
-    $result2 = mysqli_query($conn, $sql);
+    // Подготовьте SQL-запрос с использованием подготовленных выражений для безопасной обработки пользовательского ввода.
+    $stmt = mysqli_prepare($conn, $sql);
 
-    if ($result2) {
-        echo ver($conn, $title);
+    if (!$stmt) {
+        die('Ошибка подготовки SQL-запроса: ' . mysqli_error($conn));
+    }
+
+    // Свяжите значения параметров с подготовленными выражениями и выполните запрос.
+    mysqli_stmt_bind_param($stmt, "ss", $title, $content);
+
+    mysqli_stmt_execute($stmt);
+
+    $affectedRows = mysqli_stmt_affected_rows($stmt);
+
+    if ($affectedRows > 0) {
+        echo "Данные успешно добавлены";
     } else {
-        // Обработка ошибки выполнения запроса
-        echo " | Ошибка выполнения запроса: |" . mysqli_error($conn);
+        echo "Ошибка при добавлении данных";
     }
 }
 
 function ver($conn, $title)
 {
     // Подготовка и выполнение SQL-запроса
-    $sql = "SELECT * FROM `chatacc` WHERE `login` = '$title'";
-    $result = $conn->query($sql);
+    $sql = "SELECT * FROM `chatacc` WHERE `login` = ?";
 
-    if ($result->num_rows > 0) {
-        // Обработка полученных данных, например, вывод или использование в других операциях
-        while ($row = $result->fetch_assoc()) {
-            $pass_hash = $row['password'];
-            // ... другие поля
-        }
-    } else {
-        echo "Ошибка";
+    $stmt = $conn->prepare($sql);
+
+    // Параметры для подготовленного выражения
+    $stmt->bind_param("s", $title);
+
+    // Выполнение запроса
+    $stmt->execute();
+
+    // Получение результата
+    $result = $stmt->get_result();
+    while ($row = $result->fetch_assoc()) {
+        // Обработка данных
+        $pass_hash = $row['password'];
     }
 
     return $pass_hash;

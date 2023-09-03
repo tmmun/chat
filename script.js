@@ -54,6 +54,7 @@ function log() { // логин
         success: function (response) { // ответ, после завершения работы Php
 
             if (response === "Ошибка") { // если в ответе ошибка
+                console.log(response)
                 alert('Ошибка')
             }
             else {
@@ -141,11 +142,10 @@ function getMsg(nam, login) { // вывод сообщений
         dataType: 'json',
         success: function (response) {
 
+            if (msgLength < response.length) {
 
-            if (msgLength < response.data.length) {
-
-                let newMsgCount = response.data.length - msgLength // получаем кол-во новых сообщений
-                let reverseData = response.data.reverse() // реверсим масив
+                let newMsgCount = response.length - msgLength // получаем кол-во новых сообщений
+                let reverseData = response.reverse() // реверсим масив
 
                 for (let i = 0; i < newMsgCount; i++) { // выводим новые сообщения
                     $('.section').append('<div id="prof">' + reverseData[i].title + '<div id="mes">' + reverseData[i].content + '</div>')
@@ -153,7 +153,7 @@ function getMsg(nam, login) { // вывод сообщений
 
             }
 
-            msgLength = response.data.length // записываем кол-во сообщений
+            msgLength = response.length // записываем кол-во сообщений
         },
         error: function () {
             console.log('Ошибка при выполнении AJAX-запроса');
